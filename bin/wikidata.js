@@ -2,8 +2,11 @@ const FormData = require('form-data')
 const fetch = require('fetch-cookie')(require('node-fetch'))
 const {wait} = require('./helpers')
 
-function mwFetch(action, params, form) {
-  let query = `action=${action}&format=json&maxlag=5`
+function mwFetch(action, params, form, skipAssert) {
+  let query = `action=${action}&format=json&maxlag=5&bot=true`
+  if (!skipAssert) {
+    query += `&assertuser=PajnBot&assert=bot` // bot
+  }
   Object.keys(params).forEach(key => {
     query += `&${key}=${params[key]}`
   })
@@ -33,6 +36,10 @@ function mwFetch(action, params, form) {
           return wait(10000).then(doFetch)
         }
         return r.json()
+          .then(body => {
+            if (body.error) throw body.error
+            return body
+          })
       })
   }
 
@@ -40,17 +47,17 @@ function mwFetch(action, params, form) {
 }
 
 function getToken(type) {
-  return mwFetch('query', {meta: 'tokens', type})
+  return mwFetch('query', {meta: 'tokens', type}, undefined, true)
     .then(body => body.query.tokens[`${type}token`])
 }
 
 function login(username, password) {
   return getToken('login')
-    .then(token => mwFetch('clientlogin', {loginreturnurl: 'http://example.org/'}, {
+    .then(token => mwFetch('clientlogin', {_skipAssert: true, loginreturnurl: 'http://example.org/'}, {
       logintoken: token,
       username,
       password,
-    }))
+    }, true))
 }
 module.exports.login = login
 
