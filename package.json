@@ -5,15 +5,19 @@
   "author": "Rasmus Eneman <pie.or.paj@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "^6.0.46",
     "fetch-cookie": "^0.1.4",
     "form-data": "^2.1.1",
     "isomorphic-fetch": "^2.2.1",
     "nedb-promise": "^2.0.0",
     "node-fetch": "^1.6.3",
+    "redux-decorated": "^0.2.0-dev.5",
     "rxjs": "^5.0.0-rc.1"
   },
   "devDependencies": {
     "eslint": "^3.8.1",
-    "eslint-config-beanloop": "^0.1.1"
+    "eslint-config-beanloop": "^0.1.1",
+    "tscomp": "^0.4.1",
+    "typescript": "2.1.0-dev.20161104"
   }
 }

@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "declaration": false,
+    "target": "es2015",
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016",
+      "es2017"
+    ],
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@src/*": ["src/*"],
+      "@web/*": ["web/*"]
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "bin/**/*",
+    "src/**/*",
+    "web/**/*",
+    "typings/**/*",
+    "node_modules/tscomp/typings/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
+}
